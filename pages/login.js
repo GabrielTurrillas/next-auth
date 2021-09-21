@@ -1,5 +1,5 @@
-import Head from 'next/head'
 import styled from 'styled-components'
+import PrimaryButton from '../components/PrimaryButton'
 import {
   viewportsSizes,
   color
@@ -23,7 +23,10 @@ export default function Login() {
           />
         </InputArea>
         <ButtonArea>
-          <Button fontColor={color.secondary}>Sign In</Button>
+          <Button
+            fontColor={color.secondary}
+          >Sign In
+          </Button>
           <Button
             bgColor={color.primary}
             fontColor='white'
@@ -82,12 +85,6 @@ const Input = styled.input`
   text-align:center;
 `
 
-const Button = styled.button`
-  height:2.5rem;
-  width:6rem;
+const Button = styled(PrimaryButton)`
   margin-top:1rem;
-  border:none;
-  border-radius:50px;
-  color:${({ fontColor }) => fontColor};
-  background-color:${({ bgColor }) => bgColor};
 `

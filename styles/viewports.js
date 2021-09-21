@@ -1,4 +1,4 @@
-const widthSize = {
+export const widthSize = {
   mobileS: '320px',
   mobileM: '360px',
   mobileL: '480px',
