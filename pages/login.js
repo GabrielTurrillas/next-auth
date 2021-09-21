@@ -5,7 +5,7 @@ import {
   color
 } from '../styles'
 
-export default function Home() {
+export default function Login() {
   return (
     <>
       <Container className="container">
