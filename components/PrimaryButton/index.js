@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import styled from 'styled-components';
 import { device } from '../../styles';
 
@@ -8,7 +8,7 @@ const PrimaryButton = props => {
     <>
       <Button
         {...props}
-      >Button
+      >{props.children}
       </Button>
     </>
   )

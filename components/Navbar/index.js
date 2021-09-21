@@ -1,6 +1,7 @@
+import Link from 'next/link'
 import { FaBars } from 'react-icons/fa';
 import styled from 'styled-components';
-import { widthSize } from '../../styles';
+import { widthSize, color } from '../../styles';
 
 const Navbar = ({ toggle }) => {
   return (
@@ -8,24 +9,24 @@ const Navbar = ({ toggle }) => {
       <Nav>
         <NavbarContainer>
           <NavLogo>Auth Page</NavLogo>
-          <MobileIcon toggle={toggle}>
+          <MobileIcon onClick={toggle}>
             <FaBars />
           </MobileIcon>
           <NavMenu>
             <NavItem>
-              <NavLinks>
-                Works
-              </NavLinks>
+              <Link href='/'>
+                <A>Home</A>
+              </Link>
             </NavItem>
             <NavItem>
-              <NavLinks>
-                Habilidades
-              </NavLinks>
+              <Link href='/login'>
+                <A>Login</A>
+              </Link>
             </NavItem>
             <NavItem>
-              <NavLinks>
-                Technologies
-              </NavLinks>
+              <Link href='/logout'>
+                <A>Logout</A>
+              </Link>
             </NavItem>
           </NavMenu>
         </NavbarContainer>
@@ -36,19 +37,17 @@ const Navbar = ({ toggle }) => {
 
 export default Navbar;
 
-
-
 const Nav = styled.nav`
-  background:black;
+  background:${color.primary};
   height:80px;
   width: 100%;
   display: flex;
   justify-content:center;
   align-items:center;
   font-size: 1rem;
-  position: sticky;
+  position: absolute;
   top: 0;
-  z-index: 1000;
+  box-shadow: 0 8px 8px -4px lightblue;
   @media screen and (max-width: 960px) {
     transition: 0.8s all ease;
   }
@@ -59,7 +58,6 @@ const NavbarContainer = styled.div`
   background:000;
   justify-content: space-between;
   height: 80px;
-  z-index: 1;
   width: 100%;
   padding: 0 24px;
   max-width: 100%;
@@ -110,8 +108,8 @@ const NavItem = styled.li`
   height :80px;
 `;
 
-const NavLinks = styled.a`
-  color: #fff;
+const A = styled.a`
+  color: white;
   display: flex;
   align-items: center;
   text-decoration: none;

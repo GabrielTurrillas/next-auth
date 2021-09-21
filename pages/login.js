@@ -2,7 +2,8 @@ import styled from 'styled-components'
 import PrimaryButton from '../components/PrimaryButton'
 import {
   viewportsSizes,
-  color
+  color,
+  device
 } from '../styles'
 
 export default function Login() {
@@ -54,13 +55,20 @@ const TitleArea = styled.div`
   display:flex;
   justify-content:center;
   align-items:start;
-  `
+  @media ${device.mobileM}{
+    align-items:center;
+  }
+`
 
 const InputArea = styled.div`
   grid-area:InputArea;
   display:flex;
   flex-direction:column;
+  align-items:center;
   justify-content:space-around;
+  @media ${device.mobileL}{
+    justify-content:start;
+  }
 `
 
 const ButtonArea = styled.div`
@@ -69,6 +77,11 @@ const ButtonArea = styled.div`
   flex-direction:column;
   justify-content:center;
   align-items:center;
+  @media ${device.mobileL}{
+    justify-content:center;
+    align-items:start;
+    flex-direction:row;
+  }
 `
 
 const Title = styled.h1`
@@ -82,7 +95,14 @@ const Input = styled.input`
   border:none;
   height:2rem;
   border-radius:10px;
+  width:14rem;
   text-align:center;
+  @media ${device.mobileL}{
+    margin-bottom:2.5rem;
+  }
+  @media ${device.mobileL}{
+    height:3rem;
+  }
 `
 
 const Button = styled(PrimaryButton)`

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
 
-
 const Sidebar = ({ isOpen, toggle }) => {
   return (
     <>
