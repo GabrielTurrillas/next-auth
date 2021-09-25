@@ -29,7 +29,6 @@ const Button = styled.button`
   font-weight:bold;
   transition: .1s;
   cursor: pointer;
-  margin-right:1rem;
   &:hover {
     transform: scale(1.1);
   }

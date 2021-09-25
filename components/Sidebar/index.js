@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 import { FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
+import { handleSignIn, handleSignOut } from '../../lib/onClickHandlers'
+import { useSession } from 'next-auth/client'
 
 const Sidebar = ({ isOpen, toggle }) => {
+  const [session, loading] = useSession()
+
   return (
     <>
       <Container isOpen={isOpen} onClick={toggle}>
@@ -11,26 +15,36 @@ const Sidebar = ({ isOpen, toggle }) => {
         </Icon>
         <SidebarWrapper>
           <SidebarMenu>
+
             <Link href='/'>
               <SidebarLink>
-                Works
+                Home
               </SidebarLink>
             </Link>
-            <Link href='/'>
-              <SidebarLink>
-                Habilidades
-              </SidebarLink>
-            </Link>
-            <Link href='/'>
-              <SidebarLink>
-                Technologies
-              </SidebarLink>
-            </Link>
-            <SideBtnWrap>
-              <Link href="/contact">
-                Contact
+
+            {!loading && !session && (
+              <Link href='/api/auth/signin'>
+                <SidebarLink onClick={handleSignIn}>
+                  Sign in
+                </SidebarLink>
               </Link>
-            </SideBtnWrap>
+            )}
+
+            {session && (
+              <Link href='/api/auth/signout'>
+                <SidebarLink onClick={handleSignOut}>
+                  Sign out
+                </SidebarLink>
+              </Link>
+            )}
+
+            {session && (
+              <Link href='/protectedpage'>
+                <SidebarLink>
+                  Protected Page
+                </SidebarLink>
+              </Link>)}
+
           </SidebarMenu>
         </SidebarWrapper>
       </Container>

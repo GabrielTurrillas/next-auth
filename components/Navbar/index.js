@@ -1,9 +1,13 @@
 import Link from 'next/link'
 import { FaBars } from 'react-icons/fa';
 import styled from 'styled-components';
+import { useSession } from 'next-auth/client'
 import { widthSize, color } from '../../styles';
+import { handleSignIn, handleSignOut } from '../../lib/onClickHandlers'
 
 const Navbar = ({ toggle }) => {
+  const [session, loading] = useSession()
+
   return (
     <>
       <Nav>
@@ -18,16 +22,34 @@ const Navbar = ({ toggle }) => {
                 <A>Home</A>
               </Link>
             </NavItem>
-            <NavItem>
-              <Link href='/login'>
-                <A>Login</A>
-              </Link>
-            </NavItem>
-            <NavItem>
-              <Link href='/logout'>
-                <A>Logout</A>
-              </Link>
-            </NavItem>
+
+            {session && (
+              <NavItem>
+                <Link href='/protectedpage'>
+                  <A>Protected Page</A>
+                </Link>
+              </NavItem>)}
+
+            {!loading && !session && (
+              <NavItem>
+                <Link href='/api/auth/signin'>
+                  <A
+                    onClick={handleSignIn}
+                  >
+                    Sign in</A>
+                </Link>
+              </NavItem>
+            )}
+
+            {session && (
+              <NavItem>
+                <Link href='/logout/auth/signout'>
+                  <A
+                    onClick={handleSignOut}
+                  >Sign out</A>
+                </Link>
+              </NavItem>
+            )}
           </NavMenu>
         </NavbarContainer>
       </Nav>
@@ -38,14 +60,15 @@ const Navbar = ({ toggle }) => {
 export default Navbar;
 
 const Nav = styled.nav`
+  display:flex;
   background:${color.primary};
-  height:80px;
+  padding-top:0.3em;
+  padding-bottom:0.3em;
   width: 100%;
   display: flex;
   justify-content:center;
   align-items:center;
   font-size: 1rem;
-  position: absolute;
   top: 0;
   box-shadow: 0 8px 8px -4px lightblue;
   @media screen and (max-width: 960px) {
@@ -98,7 +121,8 @@ const NavMenu = styled.ul`
   display: flex;
   align-items:right;
   list-style:none;
-
+  opacity: ${({ loading }) => loading ? '0' : '1'};
+  transition: ${({ loading }) => loading ? 'all 0.2s ease-in;' : 'all 0.2s ease-in'};
   @media screen and (max-width: ${widthSize.mobileL}) {
     display: none;
   }
